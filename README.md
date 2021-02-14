@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# confusion-react
+Restaurant website from the course Front-End Web Development with React
+
+Course: [Front-End Web Development with React](https://www.coursera.org/learn/front-end-react)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
