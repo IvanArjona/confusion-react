@@ -17,7 +17,7 @@ function RenderDish({ dish }) {
 function RenderComments({ comments }) {
     const commentsList = comments.map((comment) => {
         return (
-            <li>
+            <li key={comment.id}>
                 <p>{comment.comment}</p>
                 <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
             </li>
@@ -27,7 +27,7 @@ function RenderComments({ comments }) {
     return (
         <div>
             <h4>Comments</h4>
-            <ul classItem="list-unstyled">
+            <ul className="list-unstyled">
                 {commentsList}
             </ul>
         </div>
@@ -39,10 +39,10 @@ const DishDetail = ({ dish }) => {
         return (
             <div className="container">
                 <div className="row">
-                    <div class="col-12 col-md-5 m-1">
+                    <div className="col-12 col-md-5 m-1">
                         <RenderDish dish={dish} />
                     </div>
-                    <div class="col-12 col-md-5 m-1">
+                    <div className="col-12 col-md-5 m-1">
                         <RenderComments comments={dish.comments}/>
                     </div>
                 </div>
