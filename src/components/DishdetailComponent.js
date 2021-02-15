@@ -27,7 +27,7 @@ function RenderComments({ comments }) {
     return (
         <div>
             <h4>Comments</h4>
-            <ul class="list-unstyled">
+            <ul classItem="list-unstyled">
                 {commentsList}
             </ul>
         </div>
