@@ -80,7 +80,7 @@ class Contact extends Component {
                                     <Control.text model=".firstname" id="firstname" name="firstname"
                                         placeholder="First Name"
                                         className="form-control"
-                                        validators={{ required, minLength: minLength(3), maxLength: maxLength(15) }}/>
+                                        validators={{ required, minLength: minLength(3), maxLength: maxLength(15) }} />
                                     <Errors
                                         className="text-danger"
                                         model=".firstname"
@@ -163,8 +163,8 @@ class Contact extends Component {
                                 <Col md={{ size: 3, offset: 1 }}>
                                     <Control.select model=".contactType" name="contactType"
                                             className="form-control">
-                                        <option>Tel.</option>
-                                        <option>Email</option>
+                                        <option value="tel.">Tel.</option>
+                                        <option value="email">Email</option>
                                     </Control.select>
                                 </Col>
                             </Row>
