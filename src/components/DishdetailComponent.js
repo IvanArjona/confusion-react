@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, Errors, LocalForm } from 'react-redux-form';
-
+import { Loading } from './LoadingComponent';
 
 // Validations
 const required = (val) => val && val.length;
@@ -122,8 +122,22 @@ function RenderComments({ comments, addComment, dishId }) {
     );
 }
 
-const DishDetail = ({ dish, comments, addComment }) => {
-    if (dish) {
+const DishDetail = ({ dish, isLoading, errMess, comments, addComment }) => {
+    if (isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    } else if (errMess) {
+        <div className="container">
+            <div className="row">
+                <h4>{errMess}</h4>
+            </div>
+        </div>
+    } else if (dish) {
         return (
             <div className="container">
                 <div className="row">

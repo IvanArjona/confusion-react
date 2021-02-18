@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addComment } from '../redux/ActionCreators';
+import { addComment, fetchDishes } from '../redux/ActionCreators';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
@@ -20,16 +20,23 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+    fetchDishes: () => { dispatch(fetchDishes()) }
 });
 
 class Main extends Component {
+
+    componentDidMount() {
+        this.props.fetchDishes();
+    }
 
     render() {
         const HomePage = () => {
             return (
                 <Home
-                    dish={this.props.dishes.find((dish) => dish.featured)}
+                    dish={this.props.dishes.dishes.find((dish) => dish.featured)}
+                    dishesLoading={this.props.dishes.isLoading}
+                    dishesErrMess={this.props.dishes.errMess}
                     promotion={this.props.promotions.find((promotion) => promotion.featured)}
                     leader={this.props.leaders.find((leader) => leader.featured)}
                 />
@@ -38,12 +45,14 @@ class Main extends Component {
 
         const DishWithId = ({ match }) => {
             const dishId = parseInt(match.params.dishId, 10);
-            const dish = this.props.dishes.find((dish) => dish.id === dishId);
+            const dish = this.props.dishes.dishes.find((dish) => dish.id === dishId);
             const comments = this.props.comments.filter((comment) => comment.dishId === dishId)
 
             return (
                 <DishDetail
                     dish={dish}
+                    isLoading={this.props.dishes.isLoading}
+                    errMess={this.props.dishes.errMess}
                     comments={comments}
                     addComment={this.props.addComment}
                 />
