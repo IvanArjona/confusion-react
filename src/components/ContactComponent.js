@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Label, Input, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, Form, Errors, actions } from 'react-redux-form';
 
 
 // Validations
@@ -23,6 +23,7 @@ class Contact extends Component {
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
+        this.props.resetFeedbackForm();
     }
 
     render() {
@@ -73,7 +74,7 @@ class Contact extends Component {
                         <h3>Send us your Feedback</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                        <LocalForm onSubmit={this.handleSubmit}>
+                        <Form model="feedback" onSubmit={this.handleSubmit}>
                             <Row className="form-group">
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -152,13 +153,11 @@ class Contact extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col md={{ size: 6, offset: 2 }}>
-                                    <div className="form-group">
-                                        <Label check>
-                                            <Control.checkbox model=".agree" name="agree"
-                                                className="form-check-input" /> {' '}
-                                            <strong>May we contact you?</strong>
-                                        </Label>
-                                    </div>
+                                    <Label check>
+                                        <Control.checkbox model=".agree" name="agree"
+                                            className="form-check-input" /> {' '}
+                                        <strong>May we contact you?</strong>
+                                    </Label>
                                 </Col>
                                 <Col md={{ size: 3, offset: 1 }}>
                                     <Control.select model=".contactType" name="contactType"
@@ -182,7 +181,7 @@ class Contact extends Component {
                                     </Button>
                                 </Col>
                             </Row>
-                        </LocalForm>
+                        </Form>
                     </div>
                 </div>
             </div>
