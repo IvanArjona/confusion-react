@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, Errors, LocalForm } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 // Validations
 const required = (val) => val && val.length;
@@ -92,7 +93,7 @@ class CommentForm extends Component {
 function RenderDish({ dish }) {
     return (
         <Card>
-            <CardImg width="100%" src={dish.image} alt={dish.name} />
+            <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
             <CardBody>
                 <CardTitle>{dish.name}</CardTitle>
                 <CardText>{dish.description}</CardText>
@@ -132,11 +133,13 @@ const DishDetail = ({ dish, isLoading, errMess, comments, addComment }) => {
             </div>
         );
     } else if (errMess) {
-        <div className="container">
-            <div className="row">
-                <h4>{errMess}</h4>
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{errMess}</h4>
+                </div>
             </div>
-        </div>
+        );
     } else if (dish) {
         return (
             <div className="container">
